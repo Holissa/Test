@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<INPUT TYPE="button" NAME="drop" id="but" style="background-color:#D1E8D5;" VALUE="press ">
+<INPUT TYPE="button" NAME="drop" id="but" style="background-color:#D1E8D5;" VALUE="Click to turn">
 
 <div id="container"></div>
 <script src="http://www.html5canvastutorials.com/libraries/Three.js"></script>
@@ -23,6 +23,7 @@
     var lastTime = 0;
 
 
+    //move Rigth
     function rotationRigth(){
 
         var time = (new Date()).getTime();
@@ -35,11 +36,44 @@
         renderer.render(scene, camera);
 
         // request new frame
-        requestAnimationFrame(function(){
+       /* requestAnimationFrame(function(){
             rotationRigth();
-        });
+        });*/
+        handle = window.requestAnimationFrame(rotationRigth);
     }
 
+    //stop animate, turn
+    document.getElementById("but").addEventListener("click", function () {
+        if (handle) {
+            window.cancelAnimationFrame(handle);
+            handle = null;
+            Left();
+        } else {
+            window.cancelAnimationFrame(secondhandle);
+            secondhandle = null;
+            rotationRigth();
+        }
+    }, false);
+
+
+    //move Left
+    function Left() {
+        var time = (new Date()).getTime();
+        var timeDiff = time - lastTime;
+        var angleChange = angularSpeed * timeDiff * 2 * Math.PI / 1000;
+        cube.rotation.y -= angleChange;
+        lastTime = time;
+
+        // render
+        renderer.render(scene, camera);
+
+        // request new frame
+        /* requestAnimationFrame(function(){
+         Left();
+         }); */
+        secondhandle = window.requestAnimationFrame(Left);
+
+    };
 
 
 
@@ -79,6 +113,8 @@
 
     scene.add(buildAmbientLight());
     scene.add(buildDirectionalLight());
+
+
 
 
 
