@@ -1,22 +1,27 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="http://www.html5canvastutorials.com/libraries/Three.js"></script>
     <style>
         body {
             margin: 0px;
             padding: 0px;
             background-color:#FF9999;
         }
+        #but{
+            margin: 10px;
+            position: absolute;
+        }
     </style>
 
 
 </head>
 <body>
-
-<INPUT TYPE="button" NAME="drop" id="but" style="background-color:#D1E8D5;" VALUE="Click to turn">
+<button type="button" id="but" class="btn btn-info" data-toggle="button">Click to turn</button>
 
 <div id="container"></div>
-<script src="http://www.html5canvastutorials.com/libraries/Three.js"></script>
+
 <script defer="defer">
 
     var angularSpeed = 0.2;
@@ -116,12 +121,11 @@
 
 
 
-
-
     rotationRigth();
 
 
 </script>
+
 
 
 </body>
