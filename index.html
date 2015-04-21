@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-color:#FF9999;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<INPUT TYPE="button" NAME="drop" id="but" style="background-color:#D1E8D5;" VALUE="press ">
+
+<div id="container"></div>
+<script src="http://www.html5canvastutorials.com/libraries/Three.js"></script>
+<script defer="defer">
+
+    var angularSpeed = 0.2;
+    var lastTime = 0;
+
+
+    function rotationRigth(){
+
+        var time = (new Date()).getTime();
+        var timeDiff = time - lastTime;
+        var angleChange = angularSpeed * timeDiff * 2 * Math.PI / 1000;
+        cube.rotation.y += angleChange;
+        lastTime = time;
+
+        // render
+        renderer.render(scene, camera);
+
+        // request new frame
+        requestAnimationFrame(function(){
+            rotationRigth();
+        });
+    }
+
+
+
+
+
+    var renderer = new THREE.WebGLRenderer();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // camera
+    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 500;
+
+    // scene
+    var scene = new THREE.Scene();
+
+    // cube
+    var material = new THREE.MeshLambertMaterial({
+        map: THREE.ImageUtils.loadTexture("4d7a.jpg")
+        /*color: 0x28c0ec */
+    });
+
+    var cube = new THREE.Mesh(new THREE.CubeGeometry(200, 200, 200), material );
+    cube.overdraw = true;
+    scene.add(cube);
+
+//make shadow
+    var buildDirectionalLight = function () {
+        var directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(1, 1, 1).normalize();
+        return directionalLight;
+    };
+
+    var buildAmbientLight = function () {
+        return new THREE.AmbientLight(0x999999);
+    };
+
+    scene.add(buildAmbientLight());
+    scene.add(buildDirectionalLight());
+
+
+
+    rotationRigth();
+
+
+</script>
+
+
+</body>
+</html>
