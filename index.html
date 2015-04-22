@@ -40,10 +40,6 @@
         // render
         renderer.render(scene, camera);
 
-        // request new frame
-       /* requestAnimationFrame(function(){
-            rotationRigth();
-        });*/
         handle = window.requestAnimationFrame(rotationRigth);
     }
 
@@ -72,10 +68,6 @@
         // render
         renderer.render(scene, camera);
 
-        // request new frame
-        /* requestAnimationFrame(function(){
-         Left();
-         }); */
         secondhandle = window.requestAnimationFrame(Left);
 
     };
@@ -98,7 +90,6 @@
     // cube
     var material = new THREE.MeshLambertMaterial({
         map: THREE.ImageUtils.loadTexture("4d7a.jpg")
-        /*color: 0x28c0ec */
     });
 
     var cube = new THREE.Mesh(new THREE.CubeGeometry(200, 200, 200), material );
